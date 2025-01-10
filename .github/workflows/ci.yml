@@ -23,5 +23,7 @@ jobs:
                 "repository": "${{ github.repository }}",
                 "ref": "${{ github.ref }}",
                 "commit": "${{ github.sha }}",
+                "previous_commit": "${{ github.event.before }}",
                 "pusher": "${{ github.actor }}"
               }'
+
