@@ -13,9 +13,35 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Get Repository ID and Categories
+        id: fetch_repo_data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          response=$(curl -X POST https://api.github.com/graphql \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data-raw '{
+              "query": "query { repository(owner: \"${{ github.repository_owner }}\", name: \"${{ github.event.repository.name }}\") { id discussionCategories(first: 10) { edges { node { id name } } } } }"
+            }')
+
+          # Extract Repository ID
+          repo_id=$(echo "$response" | jq -r '.data.repository.id')
+
+          # Extract Categories
+          categories=$(echo "$response" | jq -c '.data.repository.discussionCategories.edges[] | {id: .node.id, name: .node.name}')
+
+          echo "Repository ID: $repo_id"
+          echo "Categories: $categories"
+
+          echo "::set-output name=repo_id::$repo_id"
+          echo "::set-output name=categories::$categories"
+
       - name: Notify Server
         env:
           SERVER_URL: ${{ secrets.SERVER_URL }}
+          REPO_ID: ${{ steps.fetch_repo_data.outputs.repo_id }}
+          CATEGORIES: ${{ steps.fetch_repo_data.outputs.categories }}
         run: |
           curl -X POST "$SERVER_URL" \
               -H "Content-Type: application/json" \
@@ -24,7 +50,7 @@ jobs:
                 "ref": "${{ github.ref }}",
                 "commit": "${{ github.sha }}",
                 "previous_commit": "${{ github.event.before }}",
-                "pusher": "${{ github.actor }}"
+                "pusher": "${{ github.actor }}",
+                "repo_id": "$REPO_ID",
+                "categories": $CATEGORIES
               }'
-
-              
