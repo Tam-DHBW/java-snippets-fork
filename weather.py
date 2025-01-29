@@ -9,7 +9,3 @@ def generate_weather(city):
 
     return f"Weather in {city}: {condition}, {temperature}°C"
 
-if __name__ == "__main__":
-    city = input("Enter your city: ")
-    forecast = generate_weather(city)
-    print(forec
