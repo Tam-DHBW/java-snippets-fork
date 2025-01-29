@@ -10,7 +10,7 @@ def divide(a, b):
     else:
         print(f"The result is {result}")
         return result
-
+aspdinfölasndflknasdf
 divide(10, 2)  # The result is 5.0
 divide(10, 0)  # Error: Cannot divide by zero.
 divide(10, 'a')  # Error: Both inputs must be numbers.

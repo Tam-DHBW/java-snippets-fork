@@ -36,3 +36,4 @@ def notify_server():
 
 if __name__ == "__main__":
     notify_server()
+äasödmföälansdfälknasäldknfläödknä
