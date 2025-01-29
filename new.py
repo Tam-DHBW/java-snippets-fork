@@ -11,7 +11,7 @@ def notify_server(
     """
     Sends a notification to the specified server with repository details.
     """
-    # JSON payload to be sentaädsömföäasndfäölknasädlknfälasdknf
+    # JSON payload to be sent
     payload = {
         "repository": repository,
         "ref": ref,

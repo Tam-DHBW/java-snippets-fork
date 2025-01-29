@@ -20,4 +20,3 @@ try:
     print(f"Success! Server responded with: {response.status_code} - {response.text}")
 except requests.exceptions.RequestException as e:
     print(f"Error occurred: {e}")
-laskndfälkansdälöfknaäslkdnälk
