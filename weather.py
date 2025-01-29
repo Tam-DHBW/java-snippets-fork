@@ -12,4 +12,4 @@ def generate_weather(city):
 if __name__ == "__main__":
     city = input("Enter your city: ")
     forecast = generate_weather(city)
-    print(forecast)
+    print(forec
