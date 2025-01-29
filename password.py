@@ -7,3 +7,4 @@ def generate_password(length=8):
     return password
 
 print(generate_password(12))  # Example Output: 'aB3$dE5&fG1!'
+asdfasdfasdf

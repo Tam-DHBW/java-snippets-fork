@@ -6,3 +6,4 @@ def fibonacci(n):
     return sequence[:n]
 
 print(fibonacci(10))  # Output: first 10 Fibonacci numbers
+asdasdasds
